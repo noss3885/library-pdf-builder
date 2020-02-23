@@ -11,11 +11,10 @@ jobs:
       - uses: docker://pandoc/latex:2.9
         with:
           args: >- # allows you to break string into multiple lines
-            -V
             --standalone
             --output=output/example.pdf
             example/input/example.md
-            documentclass=ltjsarticle
+            -V documentclass=ltjsarticle
             --pdf-engine=lualatex
       - uses: actions/upload-artifact@v1
         with:
