@@ -6,10 +6,10 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
     steps:
-      - run: mkdir example/output
+      - run: mkdir output
       - uses: docker://pandoc/core:2.9
         with:
           args: >- # allows you to break string into multiple lines
             --standalone
-            --output=example/output/example.pdf
+            --output=output/example.pdf
             example/input/example.md
