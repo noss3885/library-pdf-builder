@@ -14,7 +14,6 @@ jobs:
             --standalone
             --output=output/example.pdf
             example/input/example.md
-            -V documentclass=ltjsarticle
             --pdf-engine=lualatex
       - uses: actions/upload-artifact@v1
         with:
