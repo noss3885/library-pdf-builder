@@ -4,16 +4,12 @@ on: [push]
 
 jobs:
   convert_via_pandoc:
-    build:
-
-      runs-on: ubuntu-18.04
-
-      steps:
-      - uses: actions/checkout@v2
+    runs-on: ubuntu-18.04
+    steps:
       - run: mkdir example/output
-      - uses: docker://pandoc/latex:2.9
-        whth:
-          args: |>
-          --standalone
-          --output=example/output/example.pdf
-          example/input/example.md
+      - uses: docker://pandoc/core:2.9
+        with:
+          args: >- # allows you to break string into multiple lines
+            --standalone
+            --output=example/output/example.pdf
+            example/input/example.md
