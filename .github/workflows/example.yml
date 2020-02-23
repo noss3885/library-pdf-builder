@@ -1,17 +1,21 @@
-name: CI
+name: Build example
 
 on: [push]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  convert_via_pandoc:
+    runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v2
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+      - uses: actions/checkout@v2
+      - run: mkdir output
+      - uses: docker://pandoc/latex:2.9
+        with:
+          args: >- # allows you to break string into multiple lines
+            --standalone
+            --output=output/example.pdf
+            example/input/example.md
+            --pdf-engine=lualatex
+      - uses: actions/upload-artifact@v1
+        with:
+          name: output
+          path: output
